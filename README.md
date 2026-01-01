@@ -24,7 +24,7 @@ Run the executable:
 ./main
 ```
 
-Follow the prompts to answer each question (0-3), then review your answers. Enter 'y' to change answers or 'n' to finish.
+Follow the prompts to answer each question (0-3), then review your answers. Enter 'y' to change answers or 'n' to finish. It's just that easy!
 
 ## Project Structure
 
