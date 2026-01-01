@@ -1,6 +1,10 @@
 #include "survey.h"
 
 int main(void){
+
+    // To Do: Prompt user to indicate if they've taken the survey before
+    // To Do: If yes, load previous answers using hex decoding  
+
     // Survey Loop
     int i = 1;
 

@@ -221,4 +221,6 @@ void print_bit_array8(uint8* ba)
         printf("%d ", (int)ba[i]);
     }
     printf("\n");
+
+    // To Do: Hex encode binary answers 
 }
