@@ -89,16 +89,16 @@ void survey_admin(int* answer, int question){
 void answer_set(int answer, char** answer_binary){
     switch(answer){
         case 0:
-            *answer_binary = "00";
+            *answer_binary = "000";
             break;
         case 1:
-            *answer_binary = "01";
+            *answer_binary = "001";
             break;
         case 2:
-            *answer_binary = "10";
+            *answer_binary = "010";
             break;
         case 3:
-            *answer_binary = "11";
+            *answer_binary = "011";
             break;
         default:
             print_separator_line();
