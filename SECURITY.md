@@ -2,20 +2,11 @@
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
-
 | Version | Supported          |
 | ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+| 0.1.0-beta.1  | :white_check_mark: |
+
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
-
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+To report a security issue, open a private GitHub Security Advisory for Unlearned5444/phq9-save-practice. You will receive an acknowledgement within 72 hours. We will provide status updates at least once every 7 days until the issue is resolved. If accepted, we will coordinate on a fix, a public advisory, and a disclosure timeline. If declined, we will explain the reason.
