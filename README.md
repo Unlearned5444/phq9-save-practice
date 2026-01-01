@@ -1,4 +1,4 @@
-# PHQ-9 Survey Tool
+# A Very Silly PHQ-9 Survey Tool
 
 A simple command-line C program that administers the Patient Health Questionnaire-9 (PHQ-9), a standardized tool for assessing depression symptoms over the past two weeks.
 
