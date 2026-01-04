@@ -1,5 +1,7 @@
 #include "survey.h"
 
+// See header for communtary on these globals.
+
 int answer_one;
 int answer_two;
 int answer_three;
@@ -20,6 +22,9 @@ char* answer_seven_binary;
 char* answer_eight_binary;
 char* answer_nine_binary;
 
+// These question strings seem pretty good, it's a really good habbit to keep your textual strings in a centralized place like this.
+// Consider adding the const keyword before them, and possibly using const char* q="..." instead of the char q[]="..." syntax that's being used right now.
+// You might move other text strings here too, like the "Over the last 2 weeks, how often have you been bothered by any of the following problems?" one.
 char question_one[] = "Little interest or pleasure in doing things\n";
 char question_two[] = "Feeling down, depressed, or hopeless\n";
 char question_three[] = "Trouble falling or staying asleep, or sleeping too much\n";
@@ -41,6 +46,26 @@ void print_separator_line(){
 }
 
 void survey_admin(int* answer, int question){
+
+/* Of the parts of the program that you have successfully and correctly completed, this if else structure is the most problematic.
+It features 9 different scanf calls.
+Instead of:
+        printf("%s%s\n", question_two, options);
+        scanf("%d", answer);
+You should do something like:
+int ask_question(const char* question_text)
+{
+    int answer=0;
+    printf("%s%s\n", question_text, options);
+    scanf("%d", answer);
+return answer;
+}
+This is only one possible way of fixing it up - the way that requires the least amount of reworking.
+For example, it would probably be better to get the question number instead of the question text. That'd work better with your question_admin infra.
+
+
+*/
+
     if (question == 1) {
         printf("Over the last 2 weeks, how often have you been bothered by any of the following problems?\n\n");
         printf("%s%s\n", question_one, options);
@@ -78,6 +103,8 @@ void survey_admin(int* answer, int question){
         printf("%s%s\n", question_nine, options);
         scanf("%d", answer);
     }
+
+// You should move this input validation inside of the proposed ask_question function.
     if (*answer < 0 || *answer > 3) {
         print_separator_line();
         printf("Invalid answer. Please enter a number between 0 and 3.");
@@ -87,6 +114,10 @@ void survey_admin(int* answer, int question){
 }
 
 void answer_set(int answer, char** answer_binary){
+// An appropriate solution to the problem at hand will not involve storing zeros and ones in char*s like this. We should be working with actual zeros and 1s, not the ascii characters 0 and 1.
+// Also, you're using 3 bits, but with only 4 unique possibilities, you should only require 2 bits. The assignment explicitly requires 2 bits per answer.
+
+
     switch(answer){
         case 0:
             *answer_binary = "000";
@@ -101,6 +132,8 @@ void answer_set(int answer, char** answer_binary){
             *answer_binary = "011";
             break;
         default:
+// Duplicate error message for invalid input. Pretty low priority honestly.
+
             print_separator_line();
             printf("Invalid answer\n");
             print_separator_line();
@@ -108,6 +141,9 @@ void answer_set(int answer, char** answer_binary){
 }
 
 void review_answers(){
+// This function is actually pretty fine given the aformentioned issues.
+// Fixing it should come pretty automatically and trivially when cleaning everything else up.
+
     printf("\n--- Review Your Answers ---\n");
     printf("Question 1:\nQ: %sA: %d\n", question_one, answer_one);
     printf("Question 2:\nQ: %sA: %d\n", question_two, answer_two);
@@ -122,12 +158,17 @@ void review_answers(){
     char review_choice;
     printf("\nDo you want to change any answers? (y/n): ");
     scanf(" %c", &review_choice);
-
+// Good handling of upper / lower case.
     if (review_choice == 'y' || review_choice == 'Y') {
         int change_q;
         do {
             printf("Enter the number of the question to change (1-9), or 0 to finish: ");
             scanf("%d", &change_q);
+// The bounding check making sure that the number is between 1 and 9 is actually unnecessary and redundant, because you go through and check each individual value in that range, and do so in a properly constructed if else chain.
+// That means you can just do any desired error handling in the else branch without the >=1 && <=9 check.
+// The only reason you still might want that is for performance, but since we're talking fractions of microseconds in an application that isn't exactly micromanaging performance, best to avoid.
+
+
             if (change_q >= 1 && change_q <= 9) {
                 if (change_q == 1) {
                     survey_admin(&answer_one, 1);
@@ -165,6 +206,8 @@ void review_answers(){
         } while (change_q != 0);
 
         printf("\n--- Updated Answers ---\n");
+// Bad! Printing all the answers in two different locations.
+// At minimum you should have a print_all_answers function so that you can centralize these 9 repeating lines.
         printf("Question 1:\nQ: %sA: %d\n", question_one, answer_one);
         printf("Question 2:\nQ: %sA: %d\n", question_two, answer_two);
         printf("Question 3:\nQ: %sA: %d\n", question_three, answer_three);
@@ -223,4 +266,6 @@ void print_bit_array8(uint8* ba)
     printf("\n");
 
     // To Do: Hex encode binary answers 
+// In appropriate location for your todo comment.
+// Okay, maybe that's a little pedantic, but really...
 }
